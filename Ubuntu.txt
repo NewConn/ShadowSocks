@@ -1,6 +1,15 @@
+1.安装Python3及pip3
+Python：一般情况下，编译Python源码即可安装Python；
+pip：
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    python get-pip.py
+
+由于Ubuntu下Python为系统的包管理器安装的版本，与get-pip不兼容，需要通过apt install python3-pip安装后，使用pip install --upgrade pip升级pip到最新版本
+根据：Be cautious if you are using a Python install that is managed by your operating system or another package manager. get-pip.py does not coordinate with those tools, and may leave your system in an inconsistent state.(https://pip.pypa.io/en/stable/installing/)
+
 2、安装ShadowSocks
-# yum install python-setuptools && easy_install pip 
-# pip install shadowsocks
+pip3 install https://github.com/shadowsocks/shadowsocks/archive/master.zip -U
+(pip3 install shadowsocks安装的不是最新版本)
 
 3、创建配置文件/etc/shadowsocks.json
 [root@localhost /]# vi /etc/shadowsocks.json 
@@ -11,10 +20,10 @@
 "local_port":1080, 
 "password":"*********", 
 "timeout":600, 
-"method":"rc4-md5"
+"method":"aes-256-gcm"
 }
 
-备注：加密方式官方默认使用aes-256-cfb，推荐使用rc4-md5，因为 RC4比AES速度快好几倍。
+备注：加密方式推荐使用aes-256-gcm
 各字段说明：
 
     server:服务器IP
